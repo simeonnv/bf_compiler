@@ -16,6 +16,7 @@ pub use args::ARGS;
 use std::fs;
 
 use crate::{
+    args::Mode,
     compiler::compile::compile,
     interpreter::interpreter_run::interpeter_run,
     optimization_layers::{joiner_layer::joiner_layer, zero_layer::zero_layer},
@@ -42,8 +43,8 @@ fn main() {
         println!("optimization time was: {:#?}", duration)
     }
 
-    // interpeter_run(&operations);
-    compile(operations)
-
-    // println!("Hello, world!");
+    match ARGS.mode {
+        Mode::Comp => compile(operations),
+        Mode::Int => interpeter_run(operations),
+    }
 }

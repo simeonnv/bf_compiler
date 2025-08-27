@@ -5,11 +5,11 @@ use std::{
     time::Instant,
 };
 
-pub fn interpeter_run(operations: &[Operation]) {
+pub fn interpeter_run(operations: Box<[Operation]>) {
     let mut cells = vec![0_u8; ARGS.stack_size];
     let mut cell_counter: usize = 0;
 
-    let loop_map = build_loop_map(operations);
+    let loop_map = build_loop_map(&operations);
     let mut ip: usize = 0; // instruction pointer
 
     let runtime_timer = Instant::now();

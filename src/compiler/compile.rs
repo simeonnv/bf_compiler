@@ -1,4 +1,4 @@
-use std::{fs::File, io::Write, mem};
+use std::{fs::File, io::Write, mem, time::Instant};
 
 use dynasmrt::{DynasmApi, DynasmLabelApi, VecAssembler, dynasm, x64::X64Relocation};
 use object::{
@@ -11,7 +11,7 @@ use crate::{ARGS, Operation};
 pub fn compile(operations: Box<[Operation]>) {
     let mut code: VecAssembler<X64Relocation> = VecAssembler::new(0);
 
-    dbg!(&operations);
+    let compilation_timer = Instant::now();
 
     dynasm! { code
         ; .arch x64
@@ -192,8 +192,14 @@ pub fn compile(operations: Box<[Operation]>) {
     });
     let text = obj.section_id(object::write::StandardSection::Text);
     obj.add_symbol_data(start, text, &code, 16);
+
     let mut out = Vec::new();
     obj.emit(&mut out).unwrap();
 
-    std::fs::write("./bf.asm", out).unwrap();
+    let duration = compilation_timer.elapsed();
+    if ARGS.time {
+        println!("compilation time was: {:#?}", duration)
+    }
+
+    std::fs::write(&ARGS.output, out).unwrap();
 }
