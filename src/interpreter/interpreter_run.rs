@@ -1,9 +1,5 @@
 use crate::{ARGS, Operation};
-use std::{
-    collections::HashMap,
-    io::{self, Read, Write},
-    time::Instant,
-};
+use std::{collections::HashMap, time::Instant};
 
 pub fn interpeter_run(operations: Box<[Operation]>) {
     let mut cells = vec![0_u8; ARGS.stack_size];

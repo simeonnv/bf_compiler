@@ -1,8 +1,6 @@
-use std::ops::Deref;
+use aho_corasick::{AhoCorasick, MatchKind};
 
-use aho_corasick::{AhoCorasick, MatchKind, PatternID};
-
-use crate::{Operation, operation, tokenizator::tokenization_pattern::TokenizationPattern};
+use crate::{Operation, tokenizator::tokenization_pattern::TokenizationPattern};
 
 // converts a bf file buff into a simple instructions of non optimised operations
 pub fn tokenize(bf_raw_buff: Vec<u8>) -> Box<[Operation]> {

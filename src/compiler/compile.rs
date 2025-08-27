@@ -1,10 +1,7 @@
-use std::{fs::File, io::Write, mem, time::Instant};
+use std::time::Instant;
 
 use dynasmrt::{DynasmApi, DynasmLabelApi, VecAssembler, dynasm, x64::X64Relocation};
-use object::{
-    SymbolFlags,
-    write::{Relocation, Symbol},
-};
+use object::{SymbolFlags, write::Symbol};
 
 use crate::{ARGS, Operation};
 

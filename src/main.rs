@@ -1,6 +1,4 @@
-use std::{path::PathBuf, str::FromStr, time::Instant};
-
-use clap::Parser;
+use std::time::Instant;
 
 pub mod compiler;
 pub mod interpreter;
