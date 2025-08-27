@@ -66,7 +66,7 @@ fn build_loop_map(operations: &[Operation]) -> HashMap<usize, usize> {
         match op {
             Operation::LoopStart => stack.push(i),
             Operation::LoopEnd => {
-                let start = stack.pop().expect("Unmatched ']' in code");
+                let start = stack.pop().expect("Unmatched loop end in code");
                 map.insert(start, i);
                 map.insert(i, start);
             }
@@ -74,6 +74,6 @@ fn build_loop_map(operations: &[Operation]) -> HashMap<usize, usize> {
         }
     }
 
-    assert!(stack.is_empty(), "Unmatched '[' in code");
+    assert!(stack.is_empty(), "Unmatched loop start in code");
     map
 }

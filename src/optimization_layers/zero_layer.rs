@@ -1,6 +1,6 @@
 use crate::Operation;
 
-// turns zero expression "[-]" (which are 3 opperations) into a single opperation Zero opperation
+// turns zero expressions "[-]" (which are 3 opperations) into a single Zero opperation
 pub fn zero_layer(operations: Box<[Operation]>) -> Box<[Operation]> {
     let mut zeroed = Vec::with_capacity(operations.len());
 
