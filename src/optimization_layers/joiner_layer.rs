@@ -1,87 +1,90 @@
-use crate::Opperation;
+use crate::Operation;
 
 // joins sequences of opperations together into single opperations
-// should be the first layer right after tokenization
-pub fn joiner_layer(operations: &[Opperation]) -> Vec<Opperation> {
-    let mut joined: Vec<Opperation> = Vec::with_capacity(operations.len());
+pub fn joiner_layer(operations: Box<[Operation]>) -> Box<[Operation]> {
+    let mut joined: Vec<Operation> = Vec::with_capacity(operations.len());
     let mut i = 0;
 
     while i < operations.len() {
         match &operations[i] {
-            Opperation::Right(n) => {
+            Operation::Right(n) => {
                 let mut total = *n;
                 i += 1;
                 while i < operations.len() {
-                    if let Opperation::Right(m) = &operations[i] {
+                    if let Operation::Right(m) = &operations[i] {
                         total = total.saturating_add(*m);
                         i += 1;
                     } else {
                         break;
                     }
                 }
-                joined.push(Opperation::Right(total));
+                joined.push(Operation::Right(total));
             }
 
-            Opperation::Left(n) => {
+            Operation::Left(n) => {
                 let mut total = *n;
                 i += 1;
                 while i < operations.len() {
-                    if let Opperation::Left(m) = &operations[i] {
+                    if let Operation::Left(m) = &operations[i] {
                         total = total.saturating_add(*m);
                         i += 1;
                     } else {
                         break;
                     }
                 }
-                joined.push(Opperation::Left(total));
+                joined.push(Operation::Left(total));
             }
 
-            Opperation::Add(n) => {
+            Operation::Add(n) => {
                 let mut total = *n;
                 i += 1;
                 while i < operations.len() {
-                    if let Opperation::Add(m) = &operations[i] {
+                    if let Operation::Add(m) = &operations[i] {
                         total = total.saturating_add(*m);
                         i += 1;
                     } else {
                         break;
                     }
                 }
-                joined.push(Opperation::Add(total));
+                joined.push(Operation::Add(total));
             }
 
-            Opperation::Sub(n) => {
+            Operation::Sub(n) => {
                 let mut total = *n;
                 i += 1;
                 while i < operations.len() {
-                    if let Opperation::Sub(m) = &operations[i] {
+                    if let Operation::Sub(m) = &operations[i] {
                         total = total.saturating_add(*m);
                         i += 1;
                     } else {
                         break;
                     }
                 }
-                joined.push(Opperation::Sub(total));
+                joined.push(Operation::Sub(total));
             }
 
-            Opperation::Output => {
-                joined.push(Opperation::Output);
+            Operation::Output => {
+                joined.push(Operation::Output);
                 i += 1;
             }
-            Opperation::Input => {
-                joined.push(Opperation::Input);
+            Operation::Input => {
+                joined.push(Operation::Input);
                 i += 1;
             }
-            Opperation::LoopStart(pos) => {
-                joined.push(Opperation::LoopStart(*pos));
+            Operation::LoopStart => {
+                joined.push(Operation::LoopStart);
                 i += 1;
             }
-            Opperation::LoopEnd(pos) => {
-                joined.push(Opperation::LoopEnd(*pos));
+            Operation::LoopEnd => {
+                joined.push(Operation::LoopEnd);
+                i += 1;
+            }
+            Operation::Zero => {
+                joined.push(Operation::Zero);
                 i += 1;
             }
         }
     }
 
-    joined
+    joined.into_boxed_slice()
 }
