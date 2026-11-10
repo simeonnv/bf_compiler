@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use std::time::Instant;
 
 use dynasmrt::{DynasmApi, DynasmLabelApi, VecAssembler, dynasm, x64::X64Relocation};

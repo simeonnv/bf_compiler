@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use crate::Operation;
 
 // turns zero expressions "[-]" (which are 3 opperations) into a single Zero opperation

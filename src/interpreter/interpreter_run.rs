@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use crate::{ARGS, Operation};
 use std::{collections::HashMap, time::Instant};
 

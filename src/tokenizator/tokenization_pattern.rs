@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use std::collections::HashMap;
 
 use lazy_static::lazy_static;

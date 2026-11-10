@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use aho_corasick::{AhoCorasick, MatchKind};
 
 use crate::{Operation, tokenizator::tokenization_pattern::TokenizationPattern};

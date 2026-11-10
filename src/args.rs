@@ -1,3 +1,6 @@
+// Copyright 2026 Simeon Vangelov
+// SPDX-License-Identifier: Apache-2.0
+
 use clap::{Parser, ValueEnum};
 use lazy_static::lazy_static;
 use std::{path::PathBuf, str::FromStr};
